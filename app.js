@@ -22,14 +22,15 @@ const Productos = mongoose.model('Productos', new mongoose.Schema({
     nombre: String,
     precio: String,
     categoria: String,
+    imagen: String,
 }))
 
 
 // CRUD
 
 app.post('/productos', async (req, res) => {
-    const { nombre, precio, categoria } = req.body
-    const productos = await Productos.create({ nombre, precio, categoria })
+    const { nombre, precio, categoria, imagen } = req.body
+    const productos = await Productos.create({ nombre, precio, categoria, imagen })
     res.json(productos)
 })
 
@@ -44,7 +45,8 @@ app.put('/productos/:id', async (req, res) => {
     const producto = await Productos.findByIdAndUpdate(id, {
         nombre: nombre,
         precio: precio,
-        categoria: categoria
+        categoria: categoria,
+        imagen: imagen
     }, { new: true })
     res.json(producto)
 })
